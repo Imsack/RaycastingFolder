@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raymarching_Explained</title>
+    <link href="styling.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Raymarching</h1>
+    <header>
+      <nav class="flex-container" aria-labelledby="primary-navigation">
+        <a href="main.html">Main</a>
+        <a href="raycasting.html">Raycasting</a>
+        <a href="raymarching.html">Raymarching</a>
+      </nav>
+    </header>
+    <h2>Creating a 3D engine using Raymarching</h2>
+    <img
+      src="raymarching_example.png"
+      alt="Visualisation of Raycmarching"
+      width="600"
+    />
+    <p>
+      Raymarching is a technique very similar to raycasting, although instead of
+      casting 2D rays into a 2D scene, we cast <i>3D rays</i> represented as
+      vectors into a <i>3D scene</i>. To be more precise, each ray is casted
+      from an origin point (often referred to as the camera or player) to a
+      plane some distance away from the origin point creating a pyramid-like
+      structure of rays. Each ray is set to correspond with a pixel on the
+      screen (the top-left most ray corresponding to the top-left most pixel and
+      so on). If a ray intersects with an object in the scene we then color the
+      pixel corresponding to the ray using information from the intersection.
+    </p>
+    <h2>Finding intersections</h2>
+    <p>
+      The procedure used to find intersections with raymarching is similar to
+      the one used for raycasting. Although before going over it we must first
+      be able to represent 3D objects in 3D space. For primitive objects like
+      spheres or planes there are equations we can use for this.
+    </p>
+    <img
+      src="sphere_example.png"
+      alt="Example of a sphere illustrated using raymarching"
+      width="600"
+    />
+    <p>
+      For more advanced objects this is usually more difficult though, so the
+      solution is often to describe the object as being made up of more simly
+      objects like planes.<br />
+      <br />
+      Once we are able to represent objects in space we need a way to search for
+      intersections with the objects and the rays. We can do this by making use
+      of a function known as a "Distance estimator". The distance estimator
+      finds the distance between a specified point on the ray and an object in
+      the scene. For complicated shapes we find the distance between every
+      simple shape that makes it up and then take the smallest of those
+      distances. Once we have this distance we can move the point on the ray
+      forward by that distance and measure the new distance from the object.
+      This is done recursively until the distance is less than some value used
+      to decide what counts as an intersection. This type of distance estimating
+      is known as "spheretracing".
+    </p>
+    <img src="spheretracing.png" alt="Example of a spheretracing" width="600" />
+    <main>
+      <p class="extra">
+        For more information on this topic read
+        <a
+          id="raymarching_extra"
+          href="http://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/"
+          >this</a
+        >
+        article
+      </p>
+    </main>
+    <footer>
+      <p class="author">Author: isak</p>
+      <p class="author">Copyright: notarealcompanyAB</p>
+      <p class="author">Conatact info: isak.livnermakitalo@elev.ga.ntig.se</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raycasting_Explained</title>
+    <link href="styling.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Raycasting</h1>
+    <header>
+      <nav class="flex-container" aria-labelledby="primary-navigation">
+        <a href="main.html">Main</a>
+        <a href="raycasting.html">Raycasting</a>
+        <a href="raymarching.html">Raymarching</a>
+      </nav>
+    </header>
+    <h2>Creating a pseudo-3D Engine using Raycasting</h2>
+    <img
+      src="raycasting-visualisation.gif"
+      alt="Visualisation of Raycasting"
+      width="600"
+    />
+    <p>
+      Raycasting includes casting rays in a <i>2D scene</i> and letting the rays
+      intersect with flat walls in the scene. Information about how to render
+      the walls in the 2D world onto the screen as <i>pseudo-3D walls</i> (as
+      shown above) can then be gathered from the intersection.
+    </p>
+
+    <h2>From intersections in the scene to rendering walls on the screen</h2>
+    <p>
+      When a ray is casted into our 2D scene we want to use information from its
+      intersection with a wall in the scene to render a piece of a that wall on
+      the screen. A piece of the wall is really referring to a
+      <i>collumn of pixels</i>
+      centered on the screen in the Y axis. To determine the height of the
+      collumn we divide a predetermined length (for example, the height of the
+      screen in pixels) by the distance between the wall and the camera plane.
+    </p>
+    <img
+      src="raycastingExample.png"
+      alt="a visualisation of the ray and the distance between the wall and the cameraplane"
+      width="600"
+    />
+    <p>
+      In the image above, the red line 'R' represents a ray, and the blue line
+      'D' represents the distance between the wall and the camera plane. The
+      camera plane is just a line perpendicular to the direction the player is
+      facing. We will let the height of the screen in pixels be the standard
+      length of a collumn. The height of any collumn is therefore going to be
+      the sceenheight divided by D. <br />
+      <br />
+      If you imagine casting a bunch of rays from the players position you might
+      be able to see how each pixel collumn (generated from each intersection in
+      the scene) next to eachother could resemble the scene. If we set the width
+      of a collumn to be the number of collumns (equal to the number of rays)
+      divided by the width of the screen in pixels we can nicely fit the
+      collumns on the screen (as long as the division gives an integer for the
+      pixel width). <br />
+      <br />
+      The placement of a collumn on the screen in the X-axis is equal to the
+      ordinal number of the ray that created it times its width.
+    </p>
+    <h2>Finding intersections</h2>
+    <p>
+      In order to actually find intersections with the rays we must first be
+      able to represent 2D objects (walls in this case) in 2D space. Since
+      raymarching works in a 2D plane it is easy to represent a grid-like world
+      using a 2d array. We can then check if a point is intersecting with a wall
+      by looking at the cell that contains the point. By gradually checking for
+      intersections with points on the ray (with some stepsize or interval
+      between each point) we can find out if the ray hits a wall at some point
+      as long as the stepsize or interval between each point isn't too large or
+      we might overshoot and miss walls.
+    </p>
+    <main>
+      <p class="extra">
+        For more information on this topic read
+        <a
+          id="raycasting_extra"
+          href="https://lodev.org/cgtutor/raycasting.html"
+          >this</a
+        >
+        article
+      </p>
+    </main>
+    <footer>
+      <p class="author">Author: isak</p>
+      <p class="author">Copyright: notarealcompanyAB</p>
+      <p class="author">Conatact info: isak.livnermakitalo@elev.ga.ntig.se</p>
+    </footer>
+  </body>
+</html>
